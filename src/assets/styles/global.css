@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0 10%;
+  background-color: lightgrey;
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  border-style: none dashed none dashed;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
