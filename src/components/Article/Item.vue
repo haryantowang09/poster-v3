@@ -18,7 +18,10 @@ export default {
       type: String
     },
     createdAt: {
-      type: Date
+      type: Date,
+      default: () => {
+        return new Date()
+      }
     },
     htmlContent: {
       type: String

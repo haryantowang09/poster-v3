@@ -1,50 +1,37 @@
 <template>
-  <section>
-    <Header msg="Welcome to basic Vue Post Website"/>
-    <div v-for="(item, index) of items" :key="index">
-      <Article
-        :addPaddingTopValue="(index%2 === 0) ? false : true"
-        :title="item.title"
-        :createdAt="item.createdAt"
-        :htmlContent="item.htmlContent"/>
-    </div>
-  </section>
+  <Header/>
+  <Button buttonText="Refresh News List" @click="inc()"/>
+  <h1>
+    Clicked {{ countState.count }} times.
+  </h1>
+  <ArticleList/>
 </template>
 
-<script>
-import Header from './components/Header.vue'
-import Article from './components/Article.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { clickStore } from './store/click-store'
 
-export default {
+import Header from './components/Header.vue'
+import Button from './components/Button.vue'
+import ArticleList from './components/Article/List.vue'
+
+export default defineComponent({
   name: 'App',
   components: {
     Header,
-    Article
+    Button,
+    ArticleList
   },
-  data () {
+  setup() {
+    const inc = () => {
+      clickStore.incrementCount()
+      clickStore.getState().count++ // should throw a warning and don't mutate the store
+    }
+
     return {
-      items: [{
-        title: 'Pen',
-        createdAt: new Date(),
-        htmlContent: `
-          <p>I have a pen</p>
-          <p>I have an apple</p>
-        `
-      }, {
-        title: 'Apple',
-        createdAt: new Date(),
-        htmlContent: `
-          <span>I have an apple</span>
-        `
-      }]
+      countState: clickStore.getState(),
+      inc
     }
   }
-}
+})
 </script>
-
-<style>
-section {
-  width: 100%;
-  color: #2c3e50;
-}
-</style>
