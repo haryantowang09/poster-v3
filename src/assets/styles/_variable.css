@@ -1,0 +1,10 @@
+:root {
+  --layout-bg: lightgrey;
+  
+  --button-primary: #0659FD;
+  --button-secondary: cyan;
+  
+  --flash-bg-success: #53D769;
+  --flash-bg-error: #FF4E4E;
+  --flash-bg-warn: #79D0F1;
+}

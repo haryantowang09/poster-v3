@@ -1,3 +1,6 @@
+// NOT USED YET
+// NEED TO LEARN FULL CYCLE USING TS
+
 import { Store } from './main'
 import { CLICK_STORE_NAME } from './store-names'
 

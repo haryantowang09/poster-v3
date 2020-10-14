@@ -1,0 +1,26 @@
+@import url('_variable.css');
+
+html,body {  
+  height: 100%;
+  background-color: var(--layout-background-color);
+  color: #2c3e50;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 10%;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+  border-style: none dashed none dashed;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0;
+  }
+}

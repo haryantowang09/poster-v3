@@ -2,7 +2,6 @@
   <nav class="header-container">
     <img alt="Vue logo" src="../assets/logo.png">
     <ul>
-      <li><a href="#bottom">Get to Bottom</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -21,7 +20,8 @@ export default defineComponent({
 .header-container {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 1em;
+  border-bottom: 5px solid red;
 }
 .header-container > img {
   width: 60px;

@@ -1,33 +1,47 @@
 <template>
   <section class="article-container">
-    <div v-for="(item, index) of items" :key="index">
-      <Article
-        :addPaddingTopValue="(index%2 === 0) ? false : true"
-        :title="item.title"
-        :createdAt="item.createdAt"
-        :htmlContent="item.htmlContent"/>
+    <div v-for="(news, index) of newsList" :key="index">
+      <div :class="addPaddingTop">
+        <a :href="news.url">
+          <img class="article-image" :src="news.urlToImage"/>
+        </a>
+        <h1>{{ news.title }}</h1>
+        <div>Author: {{ news.author}}</div>
+        <div>Published At: {{ Date(news.publishedAt) }}</div>
+        <div class="article-content">{{ news.content }}</div>
+      </div>
     </div>
   </section>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
-import Article from './Item.vue';
 
 export default defineComponent({
   name: 'ArticleList',
-  components: {
-    Article
-  },
-  props: {
-    items: {
-      type: Array,
-      default: () => [{
-        'title': 'This is where you put the Article Title',
-        'createdAt': new Date(),
-        'htmlContent': `<span>I have a pen and apple. What should I do now, Pikotaro-san ?</span>`
-      }]
+  computed: {
+    newsList() {
+      return this.$store.getters.newsList
+    },
+    addPaddingTop() {
+      return {
+        'mgt-30': true,
+      }
     }
   }
 })
 </script>
+
+<style scoped>
+.article-container.mgt-30 {
+  background-color: cyan;
+  margin-top: 30px;
+}
+.article-image {
+  width: 60px;
+  height: 60px;
+}
+.article-content {
+  padding: 5px;
+}
+</style>

@@ -23,5 +23,21 @@ export default defineComponent({
     }
   }
 })
-  
 </script>
+
+<style scoped>
+button {
+  width: 170px;
+  height: 45px;
+  background-color: var(--button-primary);
+  border-style: none;
+  border-radius: 12px;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+}
+button:active {
+  opacity: 80%;
+}
+</style>

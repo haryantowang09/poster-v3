@@ -1,36 +1,36 @@
 <template>
   <Header/>
-  <Button buttonText="Refresh News List" @click="inc()"/>
-  <h1>
-    Clicked {{ countState.count }} times.
-  </h1>
-  <ArticleList/>
+  <Flash :flashInfo="flashInfo"/>
+  <Button
+    buttonText="Get News"
+    @click="$store.dispatch('getNews')"/>
+  <ArticleList :items="$store.getters.newsList"/>
+  <About/>
+  <Footer/>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
-import { clickStore } from './store/click-store'
 
 import Header from './components/Header.vue'
+import Flash from './components/Flash.vue'
 import Button from './components/Button.vue'
 import ArticleList from './components/Article/List.vue'
+import About from './components/About.vue'
+import Footer from './components/Footer.vue'
 
 export default defineComponent({
-  name: 'App',
   components: {
     Header,
     Button,
-    ArticleList
+    ArticleList,
+    About,
+    Footer,
+    Flash
   },
-  setup() {
-    const inc = () => {
-      clickStore.incrementCount()
-      clickStore.getState().count++ // should throw a warning and don't mutate the store
-    }
-
-    return {
-      countState: clickStore.getState(),
-      inc
+  computed: {
+    flashInfo() {
+      return this.$store.getters.flashInfo;
     }
   }
 })
