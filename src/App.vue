@@ -1,6 +1,6 @@
 <template>
   <Header/>
-  <Flash :flashInfo="flashInfo"/>
+  <Flash :flashInfo="flashInfo" :showFlash="flashInfo" />
   <Button
     buttonText="Get News"
     @click="$store.dispatch('getNews')"/>

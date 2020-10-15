@@ -1,9 +1,8 @@
-// import { set, get } from 'idb-keyval';
+import { set, get, clear } from 'idb-keyval';
 import { createStore } from 'vuex'
 import {
   FETCH_NEWS_DATA,
-  FETCH_NEWS_IN_PROGRSS,
-  FETCH_NEW_HAS_ERROR,
+  FETCH_NEWS_IN_PROGRESS,
   FLASH_ERROR,
   FLASH_SUCCESS,
   FLASH_WARN
@@ -22,57 +21,69 @@ export const store = createStore({
       type: ENUM_WARN
     },
     fetchNewsInProg: false,
-    fetchNewsHasError: false,
     news: NEWS_DUMMY_DATA
   },
   mutations: {
     [FETCH_NEWS_DATA](state, payload) {
-      state.news = payload.articles
+      state.news = payload.articles;
     },
-    [FETCH_NEWS_IN_PROGRSS](state, flag) {
-      state.fetchNewsInProg = flag
+    [FETCH_NEWS_IN_PROGRESS](state, flag) {
+      state.fetchNewsInProg = flag;
     },
-    [FETCH_NEW_HAS_ERROR](state, flag) {
-      state.fetchNewsHasError = flag
+    [FLASH_SUCCESS](state, payload) {
+      state.flash = payload;
+    },
+    [FLASH_ERROR](state, payload) {
+      state.flash = payload;
     }
   },
   actions: {
     async getNews({ commit }) {
       try {
-        commit(FETCH_NEWS_IN_PROGRSS, true);
-        const API_URL = 'http://newsapi.org/v2/top-headlines?country=id&apiKey=895d9f6ee7114862bebecb37d9322f11';
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        if (data) {
-          commit(FETCH_NEWS_DATA, data);
-          commit(FLASH_SUCCESS, {
-            message: 'Successfully obtained news.',
-            type: ENUM_SUCCESS
-          })
+        const checkNews = await get('news');
+        if (!checkNews) {
+          commit(FETCH_NEWS_IN_PROGRESS, true);
+          const API_URL = 'http://newsapi.org/v2/top-headlines?country=id&apiKey=895d9f6ee7114862bebecb37d9322f11';
+          const res = await fetch(API_URL);
+          const data = await res.json();
+          if (data) {
+            set('news', data);
+            commit(FETCH_NEWS_DATA, data);
+            commit(FLASH_SUCCESS, {
+              message: 'Successfully obtained news.',
+              type: ENUM_SUCCESS
+            })
+          } else {
+            commit(FLASH_WARN, {
+              message: 'Something seems wrong in consuming the API',
+              type: ENUM_WARN
+            })
+          }
         } else {
-          commit(FLASH_WARN, {
-            message: 'Something seems wrong in consuming the API',
-            type: ENUM_WARN
+          commit(FETCH_NEWS_DATA, checkNews);
+          commit(FLASH_SUCCESS, {
+            message: 'Successfully loaded from database.',
+            type: ENUM_SUCCESS
           })
         }
       } catch (error) {
+        clear();
         console.error("Customized Get News : ", error);
-        commit(FETCH_NEW_HAS_ERROR, true);
         commit(FLASH_ERROR, {
           message: 'Something is wrong',
           type: ENUM_ERROR
         })
       } finally {
-        commit(FETCH_NEWS_IN_PROGRSS, false);
+        commit(FETCH_NEWS_IN_PROGRESS, false);
       }
     }
   },
   getters: {
     flashInfo(state) {
-      return state.flash
+      return state.flash;
     },
     newsList(state) {
-      return state.news
+      return state.news;
     }
   }
 })

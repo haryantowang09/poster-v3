@@ -1,8 +1,7 @@
 <template>
   <div>
-    <button @click="show = !show">Show Flash Alert</button>
     <transition name="fade">
-      <div v-show="show" class="flash-container">
+      <div v-show="showFlash" class="flash-container">
         <div :class="flashClassType">
           {{ flashInfo.message }}
         </div>
@@ -20,6 +19,10 @@ export default defineComponent({
   props: {
     flashInfo: {
       type: Object
+    },
+    showFlash: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
@@ -30,7 +33,8 @@ export default defineComponent({
         'flash-error': props.flashInfo.type === ENUM_ERROR,
         'flash-warn': props.flashInfo.type === ENUM_WARN
       }
-    })
+    });
+    
 
     return {
       show,
