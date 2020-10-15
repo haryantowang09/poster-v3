@@ -43,7 +43,7 @@ export const store = createStore({
         const checkNews = await get('news');
         if (!checkNews) {
           commit(FETCH_NEWS_IN_PROGRESS, true);
-          const API_URL = 'http://newsapi.org/v2/top-headlines?country=id&apiKey=895d9f6ee7114862bebecb37d9322f11';
+          const API_URL = 'https://newsapi.org/v2/top-headlines?country=id&apiKey=895d9f6ee7114862bebecb37d9322f11';
           const res = await fetch(API_URL, {
             mode: 'no-cors'
           });
