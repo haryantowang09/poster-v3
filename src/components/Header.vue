@@ -1,27 +1,33 @@
-<template>
-  <nav class="header-container">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<template lang="pug">
+nav.header-container
+  img(alt="Vue logo" src="../assets/logo.png")
+  ul
+    li
+      Button(buttonText="Get News" @click="$store.dispatch('getNews')")
+    li
+      a(href="#about")
+      | About
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
+import Button from './Button'
 
 export default defineComponent({
   name: 'Header',
+  components: {
+    Button
+  }
 });
 </script>
 
 <style scoped>
 .header-container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 1em;
   border-bottom: 5px solid red;
+  padding: 1em;
 }
 .header-container > img {
   width: 60px;
@@ -29,6 +35,7 @@ export default defineComponent({
 }
 .header-container > ul {
   display: flex;
+  align-items: center;
   flex-direction: row;
   list-style: none;
 }

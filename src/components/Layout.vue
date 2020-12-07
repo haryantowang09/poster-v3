@@ -9,7 +9,3 @@ export default {
   name: 'Layout',
 }
 </script>
-
-<style>
-  
-</style>

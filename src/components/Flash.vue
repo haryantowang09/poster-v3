@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { ENUM_SUCCESS, ENUM_ERROR, ENUM_WARN } from '../constants.js';
 
 export default defineComponent({
@@ -19,25 +19,23 @@ export default defineComponent({
   props: {
     flashInfo: {
       type: Object
-    },
-    showFlash: {
-      type: Boolean,
-      default: false
+    }
+  },
+  data () {
+    return {
+      showFlash: false,
     }
   },
   setup(props) {
-    const show = ref(false);
-    const flashClassType = computed(function() {
+    const flashClassType = computed(() => {
       return {
-        'flash-success': props.flashInfo.type === ENUM_SUCCESS,
-        'flash-error': props.flashInfo.type === ENUM_ERROR,
-        'flash-warn': props.flashInfo.type === ENUM_WARN
+        'mod-success': props.flashInfo.type === ENUM_SUCCESS,
+        'mod-error': props.flashInfo.type === ENUM_ERROR,
+        'mod-warn': props.flashInfo.type === ENUM_WARN
       }
     });
     
-
     return {
-      show,
       flashClassType
     }
   },
@@ -47,27 +45,15 @@ export default defineComponent({
 <style scoped>
 .flash-container {
   color: #FFF;
-
+  width: 100%;
 }
-.flash-success {
+.mod-success {
   background-color: var(--flash-bg-success);
-  border: 1px solid green;
 }
-.flash-error {
+.mod-error {
   background-color: var(--flash-bg-error);
-  border: 1px solid red;
 }
-.flash-warn {
+.flash-container > .mod-warn {
   background-color: var(--flash-bg-warn);
-  border: 1px solid cyan;
-}
-
-/* Animation */
-/* not working yet wtf */
-.fade-enter-active .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter .fade-leave-to {
-  opacity: 0;
 }
 </style>

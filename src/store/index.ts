@@ -17,7 +17,7 @@ import {
 export const store = createStore({
   state: {
     flash: {
-      message: 'This is default message with warning color box',
+      message: 'This is a sample sentence.',
       type: ENUM_WARN
     },
     fetchNewsInProg: false,
@@ -40,9 +40,9 @@ export const store = createStore({
   actions: {
     async getNews({ commit }) {
       try {
+        commit(FETCH_NEWS_IN_PROGRESS, true);
         const checkNews = await get('news');
         if (!checkNews) {
-          commit(FETCH_NEWS_IN_PROGRESS, true);
           const API_URL = 'https://newsapi.org/v2/top-headlines?country=id&apiKey=895d9f6ee7114862bebecb37d9322f11';
           const res = await fetch(API_URL, {
             mode: 'no-cors'
@@ -52,12 +52,12 @@ export const store = createStore({
             set('news', data);
             commit(FETCH_NEWS_DATA, data);
             commit(FLASH_SUCCESS, {
-              message: 'Successfully obtained news.',
+              message: 'Successfully obtained latest news.',
               type: ENUM_SUCCESS
             })
           } else {
             commit(FLASH_WARN, {
-              message: 'Something seems wrong in consuming the API',
+              message: 'Something seems wrong when obtaining news.',
               type: ENUM_WARN
             })
           }
@@ -69,7 +69,6 @@ export const store = createStore({
           })
         }
       } catch (error) {
-        clear();
         console.error("Customized Get News : ", error);
         commit(FLASH_ERROR, {
           message: 'Something is wrong',

@@ -1,14 +1,13 @@
 <template>
   <button
     :type="this.buttonType"
-    class="button-style"
-  >
+    class="button-style">
     {{ buttonText }}
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script>
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Button',

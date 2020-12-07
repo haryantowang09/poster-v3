@@ -1,12 +1,8 @@
-<template>
-  <Header/>
-  <Flash :flashInfo="flashInfo" :showFlash="flashInfo" />
-  <Button
-    buttonText="Get News"
-    @click="$store.dispatch('getNews')"/>
-  <ArticleList :items="$store.getters.newsList"/>
-  <About/>
-  <Footer/>
+<template lang="pug">
+Header
+Flash(:flashInfo="flashInfo")
+ArticleList(:items="$store.getters.newsList")
+BottomSheet
 </template>
 
 <script>
@@ -14,19 +10,15 @@ import { defineComponent } from 'vue'
 
 import Header from './components/Header.vue'
 import Flash from './components/Flash.vue'
-import Button from './components/Button.vue'
 import ArticleList from './components/Article/List.vue'
-import About from './components/About.vue'
-import Footer from './components/Footer.vue'
+import BottomSheet from './components/BottomSheet.vue'
 
 export default defineComponent({
   components: {
     Header,
-    Button,
     ArticleList,
-    About,
-    Footer,
-    Flash
+    Flash,
+    BottomSheet
   },
   computed: {
     flashInfo() {

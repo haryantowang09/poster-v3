@@ -1,15 +1,16 @@
 <template>
   <section class="article-container">
-    <div v-for="(news, index) of newsList" :key="index">
-      <div :class="addPaddingTop">
-        <a :href="news.url">
-          <img class="article-image" :src="news.urlToImage"/>
-        </a>
-        <h1>{{ news.title }}</h1>
-        <div>Author: {{ news.author}}</div>
-        <div>Published At: {{ Date(news.publishedAt) }}</div>
-        <div class="article-content">{{ news.content }}</div>
-      </div>
+    <!-- <div v-for="(news, index) of newsList" :key="index">
+      <a :href="news.url">
+        <img class="article-image" :src="news.urlToImage"/>
+      </a>
+      <h1>{{ news.title }}</h1>
+      <div>Author: {{ news.author}}</div>
+      <div>Published At: {{ Date(news.publishedAt) }}</div>
+      <div>{{ news.content }}</div>
+    </div> -->
+    <div v-for="index in 5" :key="index">
+      <div class="wrap"/>
     </div>
   </section>
 </template>
@@ -22,26 +23,28 @@ export default defineComponent({
   computed: {
     newsList() {
       return this.$store.getters.newsList
-    },
-    addPaddingTop() {
-      return {
-        'mgt-30': true,
-      }
     }
   }
 })
 </script>
 
 <style scoped>
-.article-container.mgt-30 {
-  background-color: cyan;
-  margin-top: 30px;
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+}
+.article-container.sample {
+  background: gold;
+  padding: 5px;
+  
+  margin: 10px;
+}
+.article-container.wrap {
 }
 .article-image {
-  width: 60px;
+  width: 120px;
   height: 60px;
-}
-.article-content {
-  padding: 5px;
 }
 </style>

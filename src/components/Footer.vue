@@ -1,6 +1,8 @@
 <template>
   <footer>
-    <div>	&copy; Poster</div>
+    <a mail:to="haryantowang09@gmail.com ">haryantowang09@gmail.com</a>
+    <span>+6281806048470</span>
+    <span>&copy; Poster V3</span>
   </footer>
 </template>
 
@@ -12,7 +14,10 @@ export default {
 
 <style scoped>
 footer {
-  height: 300px;
-  background-color: white;
+  background: #FFF;
+}
+footer > * {
+  padding-right: 1em;
+  border-right: 1px solid cyan;
 }
 </style>
