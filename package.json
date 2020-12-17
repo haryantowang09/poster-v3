@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "deploy": "node scripts/gh-pages-deploy.js",
+    "test:single": "jest test:unit Counter"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -25,13 +26,16 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0-0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "@vue/test-utils": "^2.0.0-beta.12",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "execa": "latest",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "vue-jest": "^5.0.0-alpha.7"
   },
   "eslintConfig": {
     "root": true,
@@ -52,5 +56,15 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "babel-jest"
+    }
+  }
 }
