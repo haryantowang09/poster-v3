@@ -10,7 +10,7 @@
     "test:single": "jest test:unit Counter"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "idb-keyval": "^3.2.0",
     "normalize.css": "^8.0.1",
